@@ -13,7 +13,7 @@ function App() {
       <BannerMain
         videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
         url={dadosIniciais.categorias[0].videos[0].url}
-        videoDescription={"O que é front-end? Trabalhando na área"}
+        videoDescription={'"Interestelar" narra as aventuras de um grupo de exploradores que faz uso de um buraco negro recém-descoberto para superar as limitações de uma viagem espacial humana e conquistar as grandes distâncias relacionadas a uma viagem interestelar.'}
       />
 
       <Carousel
@@ -31,7 +31,8 @@ function App() {
 
       <Carousel
         category={dadosIniciais.categorias[3]}
-      />      
+      />
+
       <Footer />
     </div>
   );
