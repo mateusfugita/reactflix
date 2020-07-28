@@ -53,7 +53,7 @@ ContentAreaContainer.Description = styled.p`
 
 ContentAreaContainer.Title = styled.h2`
   font-style: normal;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 40px;
   line-height: 1;
   margin-top: 0;
