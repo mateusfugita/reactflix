@@ -1,40 +1,50 @@
-import React from 'react';
-import Menu from '../../components/Menu'
+import React, { useState, useEffect } from 'react';
+import PageDefault from '../../components/PageDefault';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
-import Footer from '../../components/Footer';
-import dadosIniciais from '../../data/dados_iniciais.json';
+import categoriasRepository from '../../repositories/categorias';
 
 function Home() {
+  const [dadosIniciais, setDadosIniciais] = useState([]);
+
+  useEffect(() => {
+    categoriasRepository.getAllVideos()
+      .then((categoriasComVideos) => {
+        setDadosIniciais(categoriasComVideos);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-alert
+        alert(err.message);
+      });
+  }, []);
+
   return (
-    <div style={{ background: "#141414" }}>
-      <Menu />
+    <PageDefault paddingAll={0} isAdmin={false}>
+      {dadosIniciais.map((categoria, indice) => {
+        if (indice === 0) {
+          return (
+            <div key={categoria.id}>
+              <BannerMain
+                videoTitle={dadosIniciais[0].videos[0].titulo}
+                url={dadosIniciais[0].videos[0].url}
+                videoDescription={'"Interestelar" narra as aventuras de um grupo de exploradores que faz uso de um buraco negro recém-descoberto para superar as limitações de uma viagem espacial humana e conquistar as grandes distâncias relacionadas a uma viagem interestelar.'}
+              />
+              <Carousel
+                ignoreFirstVideo
+                category={dadosIniciais[0]}
+              />
+            </div>
+          );
+        }
 
-      <BannerMain
-        videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
-        url={dadosIniciais.categorias[0].videos[0].url}
-        videoDescription={'"Interestelar" narra as aventuras de um grupo de exploradores que faz uso de um buraco negro recém-descoberto para superar as limitações de uma viagem espacial humana e conquistar as grandes distâncias relacionadas a uma viagem interestelar.'}
-      />
-
-      <Carousel
-        ignoreFirstVideo
-        category={dadosIniciais.categorias[0]}
-      />
-
-      <Carousel
-        category={dadosIniciais.categorias[1]}
-      />
-
-      <Carousel
-        category={dadosIniciais.categorias[2]}
-      />      
-
-      <Carousel
-        category={dadosIniciais.categorias[3]}
-      />
-
-      <Footer />
-    </div>
+        return (
+          <Carousel
+            key={categoria.id}
+            category={categoria}
+          />
+        );
+      })}
+    </PageDefault>
   );
 }
 
