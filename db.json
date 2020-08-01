@@ -1,0 +1,16 @@
+{
+    "categorias": [
+        {
+            "id": 1,
+            "nome": "Filmes",
+            "descricao": "Filmes",
+            "cor": "red"
+        },
+        {
+            "id": 2,
+            "nome": "Séries",
+            "descricao": "Séries",
+            "cor": "red"
+        }
+    ]
+}
