@@ -26,7 +26,7 @@ export default function CadastroCategoria() {
 
   useEffect(() => {
       const URL = window.location.hostname.includes('localhost') ? 'http://localhost:8080/categorias' : 'https://fugitaflix.herokuapp.com/categorias';
-      fetch(url).then(async (resposta) => {
+      fetch(URL).then(async (resposta) => {
           const resp = await resposta.json();
           setCategorias([
               ...resp
