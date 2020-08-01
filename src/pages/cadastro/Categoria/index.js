@@ -3,26 +3,17 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
 
 export default function CadastroCategoria() {
   const valoresIniciais = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: 'red',
   };
   const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(valoresIniciais);
 
-  function setValue(key, value) {
-    setValues({
-      ...values,
-      [key]: value,
-    });
-  }
-
-  function handleChange(e) {
-    setValue(e.target.getAttribute('name'), e.target.value);
-  }
+  const { values, handleChange, clearForm } = useForm(valoresIniciais);
 
   useEffect(() => {
       const URL = window.location.hostname.includes('localhost') ? 'http://localhost:8080/categorias' : 'https://fugitaflix.herokuapp.com/categorias';
@@ -38,7 +29,7 @@ export default function CadastroCategoria() {
     <PageDefault>
       <h1>
         Cadastro de Categoria:
-        {values.nome}
+        {values.titulo}
       </h1>
 
       <form onSubmit={function handleSubmit(e) {
@@ -47,14 +38,14 @@ export default function CadastroCategoria() {
           ...categorias,
           values,
         ]);
-        setValues(valoresIniciais);
+        clearForm();
       }}
       >
         <FormField
           label="Nome da categoria:"
           type="text"
-          name="nome"
-          value={values.nome}
+          name="titulo"
+          value={values.titulo}
           onChange={handleChange}
         />
 
@@ -79,13 +70,13 @@ export default function CadastroCategoria() {
         </Button>
       </form>
 
-      <ul>
+      <ul style={{ marginBottom: '20px' }}>
         {categorias.map((categoria) => (
-          <li key={categoria.nome}>{categoria.nome}</li>
+          <li key={categoria.titulo}>{categoria.titulo}</li>
         ))}
       </ul>
 
-      <Link to="/">
+      <Link to="/admin">
         Ir para Home
       </Link>
     </PageDefault>
