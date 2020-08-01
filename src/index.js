@@ -4,6 +4,7 @@ import './index.css';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/App';
+import Admin from './pages/Admin';
 import CadastroVideo from './pages/cadastro/Video';
 import CadastroCategoria from './pages/cadastro/Categoria';
 
@@ -13,6 +14,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path='/' exact component={Home} />
+      <Route path='/admin' component={Admin} />
       <Route path='/cadastro/video' component={CadastroVideo} />
       <Route path='/cadastro/categoria' component={CadastroCategoria} />
       <Route component={Pagina404}/>
